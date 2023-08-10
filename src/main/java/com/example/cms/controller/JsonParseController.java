@@ -1,10 +1,10 @@
 package com.example.cms.controller;
 
 import com.example.cms.domain.member.Member;
-import com.example.cms.domain.member.service.JsonParseService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import jdk.jfr.Event;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -26,16 +26,20 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/api/v1/")
 public class JsonParseController {
-
-    private JsonParseService jsonParseService;
-
-    public JsonParseController(JsonParseService jsonParseService) {
-        this.jsonParseService = jsonParseService;
-    }
-
     @GetMapping("")
-    public List<?> JsonParse() throws IOException, ParseException {
+    public List<Member> JsonParse() throws IOException, ParseException {
+        ClassPathResource resource = new ClassPathResource("static/customer_table.json");
+        Reader reader = new FileReader(resource.getFile());
 
-        return jsonParseService.getJsonData();
+        JSONParser parser = new JSONParser();
+//        JSONObject obj = (JSONObject) parser.parse(reader);
+//        System.out.println(obj.toJSONString());
+
+        Object ob = parser.parse(reader);
+        JSONArray arr = new JSONArray();
+        arr.add(ob);
+        List<Member> list = arr.stream().toList();
+
+        return list;
     }
 }
