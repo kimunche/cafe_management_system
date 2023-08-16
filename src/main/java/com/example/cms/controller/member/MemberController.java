@@ -1,14 +1,12 @@
 package com.example.cms.controller.member;
 
+import com.example.cms.controller.member.form.MemberCreateForm;
 import com.example.cms.domain.member.Member;
 import com.example.cms.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +45,13 @@ public class MemberController {
     public String MemberEdit(){
 
         return "redirect:/member/info";
+    }
+
+    @PostMapping("/create")
+    public String create(@RequestBody MemberCreateForm memberCreateForm){
+        Long id = memberService.create(memberCreateForm).getId();
+        memberService.findById(id);
+        return "redirect:/member/memberList";
     }
 
 }
