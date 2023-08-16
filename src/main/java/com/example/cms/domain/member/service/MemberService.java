@@ -1,13 +1,12 @@
 package com.example.cms.domain.member.service;
 
-import com.example.cms.controller.member.response.MemberResponse;
 import com.example.cms.domain.member.Member;
 import com.example.cms.domain.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class MemberService {
@@ -18,8 +17,13 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public List<MemberResponse> findAll(){
-        return memberRepository.findAll().stream().map(MemberResponse::of)
-                .collect(Collectors.toList());
+    public List<Member> findAll(){
+        return memberRepository.findAll();
     }
+
+    @Transactional(readOnly = true)
+    public Optional<Member> findById(Long id){
+        return memberRepository.findById(id);
+    }
+
 }

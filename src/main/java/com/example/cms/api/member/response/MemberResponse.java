@@ -1,4 +1,4 @@
-package com.example.cms.controller.member.response;
+package com.example.cms.api.member.response;
 
 import com.example.cms.domain.member.Member;
 import lombok.*;
