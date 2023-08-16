@@ -15,10 +15,10 @@
   </tr>
   </thead>
   <tbody>
-  <tr th:each="customer : ${customers}">
-    <td th:text="${customer.id}"></td>
-    <td th:text="${customer.name}"></td>
-    <td th:text="${customer.email}"></td>
+  <tr th:each="member : ${members}">
+    <td> <a th:text="${member.id}" th:href="@{|/member/info/${member.id}|}"></a></td>
+    <td th:text="${member.name}"></td>
+    <td th:text="${member.email}"></td>
   </tr>
   </tbody>
 </table>
