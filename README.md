@@ -3,10 +3,10 @@
 시스템정보
 - Java 17
 - Spring Boot 3.1.2
-- Web UI는 thymeleaf 라이브러리 사용
 
-* UI 제외, API만 개발. (restful Tool을 이용한 조회)
+* UI 제외, API만 개발. (restful Tool을 이용한 데이터 확인)
 * 커피가게 백엔드 API 개발 (프랜차이즈)
+* Swagger 적용을 통한 API 문서 노출
 
 ## 주문관리
 
