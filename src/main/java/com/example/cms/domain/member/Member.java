@@ -36,4 +36,11 @@ public class Member {
         this.email = email;
         this.phone = phone;
     }
+
+    public void edit(String name, String email, Integer age, String phone){
+        this.name = name;
+        this.age = age;
+        this.email = email;
+        this.phone = phone;
+    }
 }

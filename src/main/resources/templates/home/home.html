@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <link th:href="@{/css/bootstrap.min.css}"
-        href="../css/bootstrap.min.css" rel="stylesheet">
-  <title>Home</title>
+<head th:replace="fragments/header :: header">
+  <title>HOME</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 </head>
 <body>
 
-<div>
-  <h1>basic CRUD</h1>
+<div class="container">
+  <div th:replace="fragments/bodyHeader :: bodyHeader"  />
+  <div class="jumbotron">
+  <h1>PTK CMS</h1>
   <p>
     <a class="btn btn-lg btn-secondary" th:href="@{|/member/list|}" >회원 리스트</a>
-    <a class="btn btn-lg btn-secondary" th:href="@{/member/join}" >회원 추가</a>
+    <a class="btn btn-lg btn-secondary" th:href="@{/member/create}" >회원 추가</a>
   </p>
+
 <!--  <p>-->
 <!--    <a class="btn btn-lg btn-secondary" th:href="@{/member/edit}" >회원 정보 수정</a>-->
 <!--  </p>-->
-
+  </div>
+  <div th:replace="fragments/footer :: footer" />
 </div>
 </body>
 </html>
