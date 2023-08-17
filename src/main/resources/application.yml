@@ -1,25 +1,27 @@
 spring:
-  h2:
-    console:
-      enabled: true
-  profiles:
-    active: local
   datasource:
-    hikari:
-      jdbc-url: jdbc:h2:./data/testdb
-      driver-class-name: org.h2.Driver
-      username: sa
-      password:
+    url: jdbc:mysql://localhost:3306/test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: testdb!
+    dbcp2:
+      test-on-create:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
+        physical_naming_strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         format_sql: true
+    show-sql: true
 
   # 로그 레벨 설정
   logging:
     level:
       org.hibernate.SQL: debug
       org.hibernate.type: trace # 실제 들어가는 파라미터값 찍어주는 설정
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
