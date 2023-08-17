@@ -5,7 +5,7 @@
 - Spring Boot 3.1.2
 
 * UI 제외, API만 개발. (restful Tool을 이용한 데이터 확인)
-* 커피가게 백엔드 API 개발 (프랜차이즈)
+* 커피가게 백엔드 API 개발
 * Swagger 적용을 통한 API 문서 노출
 
 ## 주문관리
