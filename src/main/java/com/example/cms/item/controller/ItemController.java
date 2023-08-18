@@ -2,7 +2,8 @@ package com.example.cms.item.controller;
 
 import com.example.cms.item.controller.response.ItemResponse;
 import com.example.cms.item.service.ItemService;
-import io.swagger.annotations.ApiOperation;
+
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,7 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    @ApiOperation(value = "상품 목록 조회", notes = "상품 목록 전부 조회함")
+    @Operation(summary = "상품 목록 조회", description = "상품 목록 전부 조회함")
     @GetMapping
     public List<ItemResponse> findAll(){
         return itemService.findAll();

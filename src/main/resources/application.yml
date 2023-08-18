@@ -9,7 +9,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         physical_naming_strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
@@ -25,3 +25,10 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+
+#swagger
+springdoc:
+  version: v1.0.0
+  swagger-ui:
+  packages-to-scan: com.example.cms

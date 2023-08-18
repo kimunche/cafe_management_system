@@ -8,18 +8,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class ItemResponse {
-    private String itemName;
+    private String name;
     private Integer cost;
 
     @Builder
-    public ItemResponse(String itemName, Integer cost) {
-        this.itemName = itemName;
+    public ItemResponse(String name, Integer cost) {
+        this.name = name;
         this.cost = cost;
     }
 
     public static ItemResponse of(Item item){
         return ItemResponse.builder()
-                .itemName(item.getItemName())
+                .name(item.getName())
                 .cost(item.getCost())
                 .build();
     }

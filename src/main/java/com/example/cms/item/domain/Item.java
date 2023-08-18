@@ -17,17 +17,17 @@ public class Item {
     @Column(name = "item_id")
     private Integer itemId;
 
-    @Column(name = "item_name")
-    private String itemName;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "cost")
     private Integer cost;
 
 
     @Builder
-    public Item(Integer itemId, String itemName, Integer cost) {
+    public Item(Integer itemId, String name, Integer cost) {
         this.itemId = itemId;
-        this.itemName = itemName;
+        this.name = name;
         this.cost = cost;
     }
 }

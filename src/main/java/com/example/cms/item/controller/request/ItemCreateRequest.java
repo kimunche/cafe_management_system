@@ -10,20 +10,20 @@ import lombok.NoArgsConstructor;
 public class ItemCreateRequest {
 
     private Integer itemId;
-    private String itemName;
+    private String name;
     private Integer cost;
 
     @Builder
-    public ItemCreateRequest(Integer itemId, String itemName, Integer cost) {
+    public ItemCreateRequest(Integer itemId, String name, Integer cost) {
         this.itemId = itemId;
-        this.itemName = itemName;
+        this.name = name;
         this.cost = cost;
     }
 
     public Item toItem(){
         return Item.builder()
                 .itemId(itemId)
-                .itemName(itemName)
+                .name(name)
                 .cost(cost)
                 .build();
     }
