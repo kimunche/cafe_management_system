@@ -60,8 +60,6 @@ public class ItemService {
         }
     }
 
-    //TODO: 수정, 삭제
-
     @Transactional
     public void update(ItemUpdateRequest updateRequest){
         Item updateItem = updateRequest.toItem();
