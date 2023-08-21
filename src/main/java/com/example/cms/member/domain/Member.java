@@ -15,14 +15,17 @@ public class Member {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
+    @Column(length = 11)
     private String mobile;
+
     private String name;
     private Integer membershipPoint;
     private LocalDate joinDate;
-    private Boolean status;
 
+    @Enumerated(EnumType.STRING)
+    private MemberStatus status;
     @Builder
-    public Member(Long id, String mobile, String name, Integer membershipPoint, LocalDate joinDate, Boolean status) {
+    public Member(Long id, String mobile, String name, Integer membershipPoint, LocalDate joinDate, MemberStatus status) {
         this.id = id;
         this.mobile = mobile;
         this.name = name;
@@ -35,4 +38,8 @@ public class Member {
         this.membershipPoint = 10000;
     }
 
+    public void update(String name, String mobile){
+        this.name = name;
+        this.mobile = mobile;
+    }
 }
