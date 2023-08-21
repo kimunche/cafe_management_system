@@ -3,16 +3,13 @@ package com.example.cms.member.controller.response;
 import lombok.Data;
 
 @Data
-public class MemberResponse {
+public class MemberUpdateResponse {
 
     private String mobile;
     private String name;
-    private Integer membershipPoint;
 
-    public MemberResponse(String mobile, String name, Integer membershipPoint) {
+    public MemberUpdateResponse(String mobile, String name) {
         this.mobile = mobile;
         this.name = name;
-        this.membershipPoint = membershipPoint;
     }
-
 }
