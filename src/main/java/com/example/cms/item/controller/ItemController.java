@@ -1,6 +1,7 @@
 package com.example.cms.item.controller;
 
 import com.example.cms.item.controller.request.ItemCreateRequest;
+import com.example.cms.item.controller.request.ItemUpdateRequest;
 import com.example.cms.item.controller.response.ItemResponse;
 import com.example.cms.item.service.ItemService;
 
@@ -27,9 +28,9 @@ public class ItemController {
         return itemService.findAll();
     }
 
-    @Operation(summary = "상품 이름으로 조회", description = "상품 이름으로 like 조회합니다.")
-    @GetMapping
-    public ItemResponse findByName(@PathVariable("item") String name){
+    @Operation(summary = "상품 이름으로 조회", description = "상품 이름으로 Containing 조회합니다.")
+    @GetMapping("/{itemName}")
+    public List<ItemResponse> findByName(@PathVariable("itemName") String name){
         return itemService.findByName(name);
     }
 
@@ -37,5 +38,18 @@ public class ItemController {
     @PostMapping
     public void create(@RequestBody ItemCreateRequest itemCreateRequest){
         itemService.create(itemCreateRequest);
+    }
+
+    @Operation(summary = "상품 정보 수정", description = "상품 정보를 수정합니다.")
+    @PostMapping("/update")
+    public void update(@RequestBody ItemUpdateRequest itemUpdateRequest){
+        itemService.update(itemUpdateRequest);
+    }
+
+
+    @Operation(summary = "상품 삭제", description = "상품 id로 개별 삭제")
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long id){
+        itemService.delete(id);
     }
 }
