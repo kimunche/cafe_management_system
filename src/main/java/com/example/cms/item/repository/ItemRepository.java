@@ -9,11 +9,10 @@ import java.util.Optional;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
-
-    Item save(Item item);
-
     List<Item> findAll();
-    Optional<Item> findByItemId(int itemId);
+    Optional<Item> findByNameLike(String name);
 
-    void deleteByItemId(int itemId);
+    boolean existsByName(String name);
+
+    void deleteByItemId(String name);
 }

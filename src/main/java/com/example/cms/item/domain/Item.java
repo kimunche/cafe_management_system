@@ -9,13 +9,10 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item {
 
+    @Id
     @Column(name = "seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Id
-    @Column(name = "item_id")
-    private Integer itemId;
+    private Long itemId;
 
     @Column(name = "name")
     private String name;
@@ -25,7 +22,7 @@ public class Item {
 
 
     @Builder
-    public Item(Integer itemId, String name, Integer cost) {
+    public Item(Long itemId, String name, Integer cost) {
         this.itemId = itemId;
         this.name = name;
         this.cost = cost;
