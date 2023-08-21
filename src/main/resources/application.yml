@@ -23,3 +23,14 @@ spring:
     level:
       org.hibernate.SQL: debug
       org.hibernate.type: trace # 실제 들어가는 파라미터값 찍어주는 설정
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+
+#swagger
+springdoc:
+  version: v1.0.0
+  swagger-ui:
+  packages-to-scan: com.example.cms
