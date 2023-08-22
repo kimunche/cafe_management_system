@@ -16,10 +16,11 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findAllByNameContaining(String name);
 
     boolean existsByNameAndAndHotIce(String name, ItemStatus hotIce);
+    //Optional<Item> findByNameAndHotIce(String name, ItemStatus hotIce);
 
-    Optional<Item> findByNameAndHotIce(String name, ItemStatus hotIce);
+    Item findByNameAndHotIce(String name, ItemStatus hotIce);
 
     void deleteByItemId(Long id);
 
-    boolean findByNameAndCostAndHotIce(String name, int cost, ItemStatus hotIce);
+    boolean existsByNameAndCostAndHotIce(String name, int cost, ItemStatus hotIce);
 }

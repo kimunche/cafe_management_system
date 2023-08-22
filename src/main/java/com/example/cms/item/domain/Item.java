@@ -31,8 +31,7 @@ public class Item {
         this.hotIce = hotIce;
     }
 
-    public void update(Long itemId, String name, Integer cost, ItemStatus hotIce) {
-        this.itemId = itemId;
+    public void update(String name, Integer cost, ItemStatus hotIce) {
         this.name = name;
         this.cost = cost;
         this.hotIce = hotIce;
