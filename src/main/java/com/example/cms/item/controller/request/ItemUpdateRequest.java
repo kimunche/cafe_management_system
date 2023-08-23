@@ -10,12 +10,14 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ItemUpdateRequest {
 
+    private Long itemId;
     private String name;
     private Integer cost;
     private ItemStatus hotIce;
 
     @Builder
-    public ItemUpdateRequest(String name, Integer cost, ItemStatus hotIce) {
+    public ItemUpdateRequest(Long itemId, String name, Integer cost, ItemStatus hotIce) {
+        this.itemId = itemId;
         this.name = name;
         this.cost = cost;
         this.hotIce = hotIce;
@@ -24,6 +26,7 @@ public class ItemUpdateRequest {
 
     public Item toItem(){
         return Item.builder()
+                .id(itemId)
                 .name(name)
                 .cost(cost)
                 .hotIce(hotIce)

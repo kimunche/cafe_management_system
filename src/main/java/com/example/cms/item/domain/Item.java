@@ -25,13 +25,15 @@ public class Item {
     private ItemStatus hotIce;
 
     @Builder
-    public Item(String name, Integer cost, ItemStatus hotIce) {
+    public Item(Long id,String name, Integer cost, ItemStatus hotIce) {
+        this.itemId = id;
         this.name = name;
         this.cost = cost;
         this.hotIce = hotIce;
     }
 
-    public void update(String name, Integer cost, ItemStatus hotIce) {
+    public void update(Long id, String name, Integer cost, ItemStatus hotIce) {
+        this.itemId = id;
         this.name = name;
         this.cost = cost;
         this.hotIce = hotIce;
