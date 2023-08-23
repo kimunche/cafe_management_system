@@ -9,7 +9,8 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItems {
 
-    @Id @Column(name = "order_items_id")
+    @Id
+    @Column(name = "order_items_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
