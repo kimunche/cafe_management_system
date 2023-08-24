@@ -61,7 +61,7 @@ public class ItemService {
             String input = s.nextLine();
 
             if(input.equals("Y")){
-                originItem.update(originItem.getName(), newItem.getCost(), originItem.getHotIce());
+                originItem.update(originItem.getItemId(), originItem.getName(), newItem.getCost(), originItem.getHotIce());
                 itemRepository.save(originItem);
             }
 
@@ -73,20 +73,25 @@ public class ItemService {
     public void update(ItemUpdateRequest updateRequest){
         Item updateItem = updateRequest.toItem();
 
+        //name, cost, h/i 가 모두 중복
         Boolean isDuplicated = itemRepository.existsByNameAndCostAndHotIce(updateItem.getName(), updateItem.getCost(), updateItem.getHotIce());
         if(isDuplicated) {
             throw new IllegalStateException("중복되는 기존 메뉴가 있습니다." + updateItem.getName() + "(" + updateItem.getHotIce() + ") " + updateItem.getCost() + "원");
         }else {
-//            Item originItem = itemRepository.findByNameAndHotIce(updateItem.getName(), updateItem.getHotIce());
-//
-//            if(originItem != null){
-//                throw new IllegalStateException("중복되는 기존 메뉴가 있습니다." + originItem.getName() + "(" + originItem.getHotIce() + ") " + originItem.getCost() + "원");
-//            }else{
-//                itemRepository.save(updateItem);
-//            }
+            //name , h/i 중복
+            Item originItem = itemRepository.findByNameAndHotIce(updateItem.getName(), updateItem.getHotIce());
 
-            updateItem.update(updateItem.getName(), updateItem.getCost(), updateItem.getHotIce());
-            itemRepository.save(updateItem);
+            if(originItem != null){
+                //cost 만 다를경우
+                if(originItem.getCost() != updateItem.getCost()){
+                    updateItem.update(updateItem.getItemId(), originItem.getName(), updateItem.getCost(), originItem.getHotIce());
+                    itemRepository.save(updateItem);
+                }
+//                throw new IllegalStateException("중복되는 기존 메뉴가 있습니다." + originItem.getName() + "(" + originItem.getHotIce() + ") " + originItem.getCost() + "원");
+            }else{
+                updateItem.update(updateItem.getItemId(), updateItem.getName(), updateItem.getCost(), updateItem.getHotIce());
+                itemRepository.save(updateItem);
+            }
 
         }
     }
