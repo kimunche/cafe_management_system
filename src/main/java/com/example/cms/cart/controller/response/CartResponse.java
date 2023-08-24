@@ -1,17 +1,20 @@
 package com.example.cms.cart.controller.response;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
-@Data
+@Getter
 public class CartResponse {
 
     private Integer totalCount;
-//    private Integer totalPrice;
+    private Integer totalPrice;
 
-    public CartResponse(Integer totalCount) {
+    @Builder
+    public CartResponse(Integer totalCount, Integer totalPrice) {
         this.totalCount = totalCount;
-//        this.totalPrice = totalPrice;
+        this.totalPrice = totalPrice;
     }
 }

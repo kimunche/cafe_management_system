@@ -5,12 +5,15 @@ import com.example.cms.member.domain.Member;
 import com.example.cms.member.domain.MemberStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
-@Data
+@Getter
 public class MemberCreateRequest {
 
     @NotEmpty
@@ -18,21 +21,21 @@ public class MemberCreateRequest {
 
     @NotBlank
     private String name;
-    private LocalDate joinDate;
+    private LocalDateTime createDate;
     private MemberStatus status;
     public Member toEntity(){
         return Member.builder()
                 .mobile(mobile)
                 .name(name)
-                .joinDate(LocalDate.now())
+                .createDate(LocalDateTime.now())
                 .status(MemberStatus.OPEN)
                 .build();
     }
-
-    public MemberCreateRequest(String mobile, String name, LocalDate joinDate, MemberStatus status) {
+    @Builder
+    public MemberCreateRequest(String mobile, String name, LocalDateTime createDate, MemberStatus status) {
         this.mobile = mobile;
         this.name = name;
-        this.joinDate = joinDate;
+        this.createDate = createDate;
         this.status = status;
     }
 }

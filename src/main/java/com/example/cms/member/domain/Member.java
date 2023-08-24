@@ -6,9 +6,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity @Getter
+@Table(name = "member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
@@ -19,23 +20,32 @@ public class Member {
     private String mobile;
 
     private String name;
+
+    @Column(name = "membership_point")
     private Integer membershipPoint;
-    private LocalDate joinDate;
+
+    @Column(name = "create_date")
+    private LocalDateTime createDate;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private MemberStatus status;
+
+    //첫 회원 가입 포인트
+    Integer firstJoinPoint = 10000;
+
     @Builder
-    public Member(Long id, String mobile, String name, Integer membershipPoint, LocalDate joinDate, MemberStatus status) {
+    public Member(Long id, String mobile, String name, Integer membershipPoint, LocalDateTime createDate, MemberStatus status) {
         this.id = id;
         this.mobile = mobile;
         this.name = name;
         this.membershipPoint = membershipPoint;
-        this.joinDate = joinDate;
+        this.createDate = createDate;
         this.status = status;
     }
 
     public void firstPoint(){
-        this.membershipPoint = 10000;
+        this.membershipPoint = firstJoinPoint;
     }
 
     public void update(String name, String mobile){
