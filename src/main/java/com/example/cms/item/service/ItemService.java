@@ -50,22 +50,13 @@ public class ItemService {
     }
 
     private void validateDuplicate(Item originItem, Item newItem){
-        // 이름과 상태값이 같은 제품이 있을경우, 가격 비교 - 가격이 같은 경우 중복으로 인식 / 가격이 다른경우 - 변경여부 물어봄
+        // 이름과 상태값이 같은 제품이 있을경우
         if(originItem != null && ( originItem.getCost().equals(newItem.getCost()))){
-            throw new IllegalStateException("이미 같은 이름, 가격, hot&Ice 의 메뉴가 있습니다. " + originItem.getName() + "("+ originItem.getHotIce() +") " +originItem.getCost());
+            throw new IllegalStateException("중복되는 기존 메뉴가 있습니다. " + originItem.getName() + "("+ originItem.getHotIce() +") " +originItem.getCost());
 
         }else if(originItem != null && ( originItem.getCost() != newItem.getCost())){
-            System.out.printf("%s(%s) 메뉴의 가격은 %d 으로 책정되어 있습니다. 가격을 바꾸시겠습니까? (Y/N) : ", newItem.getName(), newItem.getHotIce(), originItem.getCost());
+            throw new IllegalStateException(newItem.getName() +"("+newItem.getHotIce()+") 는(운) 이미 "+originItem.getCost()+"원 으로 책정되어있습니다.");
 
-            Scanner s = new Scanner(System.in);
-            String input = s.nextLine();
-
-            if(input.equals("Y")){
-                originItem.update(originItem.getItemId(), originItem.getName(), newItem.getCost(), originItem.getHotIce());
-                itemRepository.save(originItem);
-            }
-
-            //s.close();
         }
     }
 
@@ -76,23 +67,20 @@ public class ItemService {
         //name, cost, h/i 가 모두 중복
         Boolean isDuplicated = itemRepository.existsByNameAndCostAndHotIce(updateItem.getName(), updateItem.getCost(), updateItem.getHotIce());
         if(isDuplicated) {
-            throw new IllegalStateException("중복되는 기존 메뉴가 있습니다." + updateItem.getName() + "(" + updateItem.getHotIce() + ") " + updateItem.getCost() + "원");
-        }else {
-            //name , h/i 중복
-            Item originItem = itemRepository.findByNameAndHotIce(updateItem.getName(), updateItem.getHotIce());
+            throw new IllegalStateException("중복되는 기존 메뉴가 있습니다. " + updateItem.getName() + "(" + updateItem.getHotIce() + ") " + updateItem.getCost() + "원");
+        }
 
-            if(originItem != null){
-                //cost 만 다를경우
-                if(originItem.getCost() != updateItem.getCost()){
-                    updateItem.update(updateItem.getItemId(), originItem.getName(), updateItem.getCost(), originItem.getHotIce());
-                    itemRepository.save(updateItem);
-                }
-//                throw new IllegalStateException("중복되는 기존 메뉴가 있습니다." + originItem.getName() + "(" + originItem.getHotIce() + ") " + originItem.getCost() + "원");
-            }else{
-                updateItem.update(updateItem.getItemId(), updateItem.getName(), updateItem.getCost(), updateItem.getHotIce());
-                itemRepository.save(updateItem);
-            }
+        //name , h/i 중복
+        Item originItem = itemRepository.findByNameAndHotIce(updateItem.getName(), updateItem.getHotIce());
 
+        if (originItem != null && originItem.getCost() != updateItem.getCost()){
+            //cost 만 다를경우 cost만 업뎃
+            updateItem.update(updateItem.getItemId(), originItem.getName(), updateItem.getCost(), originItem.getHotIce());
+            itemRepository.save(updateItem);
+        }else if(originItem == null){
+            //중복된것 없으면 그냥 업뎃
+            updateItem.update(updateItem.getItemId(), updateItem.getName(), updateItem.getCost(), updateItem.getHotIce());
+            itemRepository.save(updateItem);
         }
     }
 
