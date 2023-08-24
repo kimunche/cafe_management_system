@@ -37,19 +37,18 @@ public class Order {
     @Column(name = "payment", nullable = false)
     private Payments payment;
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+//    @ManyToOne
+//    @JoinColumn(name = "member_id")
+//    private Member member;
 
     @Builder
-    public Order(Long id, String ordersNumber, LocalDateTime ordersDate, LocalDateTime cancelDate, Integer ordersPrice, Payments payment, Member member) {
+    public Order(Long id, String ordersNumber, LocalDateTime ordersDate, LocalDateTime cancelDate, Integer ordersPrice, Payments payment) {
         this.id = id;
         this.ordersNumber = ordersNumber;
         this.ordersDate = ordersDate;
         this.cancelDate = cancelDate;
         this.ordersPrice = ordersPrice;
         this.payment = payment;
-        this.member = member;
     }
 
     public void cancel(LocalDateTime cancelDate){
