@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Getter
-@MappedSuperclass //JPA Entity 클래스들이 상속할 경우 필드들(createdTime, lastModifiedTime)도 컬럼으로 인식하도록 합
+@MappedSuperclass //JPA Entity 클래스들이 상속할 경우 필드들(createdAt, modifiedAt)도 컬럼으로 인식하도록 합
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseDateTimeEntity {
 
