@@ -1,5 +1,6 @@
 package com.example.cms.item.domain;
 
+import com.example.cms.utils.entity.BaseDateTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,7 +8,7 @@ import lombok.*;
 @Table(name = "item")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Item {
+public class Item extends BaseDateTimeEntity {
 
     @Id
     @Column(name = "seq")

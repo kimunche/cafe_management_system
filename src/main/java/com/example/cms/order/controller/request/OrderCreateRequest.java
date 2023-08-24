@@ -35,7 +35,6 @@ public class OrderCreateRequest {
                 .ordersDate(ordersDate)
                 .ordersPrice(ordersPrice)
                 .payment(payment)
-                .member(member)
                 .build();
     }
 }
