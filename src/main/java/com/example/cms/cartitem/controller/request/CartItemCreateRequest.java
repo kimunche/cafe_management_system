@@ -15,7 +15,6 @@ public class CartItemCreateRequest {
     private Integer count;
     private ItemStatus status;
 
-    private List<CartItemCreateRequest> cartItemCreateRequests;
 
     public CartItemCreateRequest() {
     }

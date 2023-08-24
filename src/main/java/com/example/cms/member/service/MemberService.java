@@ -21,9 +21,7 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    /**
-     * 중복검사 좋은 방법 체크
-     */
+
     @Transactional
     public MemberCreateResponse save(MemberCreateRequest memberCreateRequest){
         if (memberRepository.findByMobile(memberCreateRequest.getMobile()).isPresent()){

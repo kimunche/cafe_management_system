@@ -33,10 +33,7 @@ public class CartItem {
         this.price = price;
     }
 
-    /**
-     * TODO
-     * 멤버 안넣었음 일단 이야기해보고 결정
-     */
+
     public static CartItem createCartItem(Cart cart, Item item, Integer price, Integer count){
         return new CartItem(cart, item, count, price);
     }
