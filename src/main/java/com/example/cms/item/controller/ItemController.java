@@ -1,6 +1,7 @@
 package com.example.cms.item.controller;
 
 import com.example.cms.item.controller.request.ItemCreateRequest;
+import com.example.cms.item.controller.request.ItemSearchRequest;
 import com.example.cms.item.controller.request.ItemUpdateRequest;
 import com.example.cms.item.controller.response.ItemResponse;
 import com.example.cms.item.service.ItemService;
@@ -51,5 +52,12 @@ public class ItemController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id){
         itemService.delete(id);
+    }
+
+    //TODO: 필터링 완료
+    @GetMapping("/search/items")
+    @Operation(summary = "상품 검색", description = "상품을 조건으로 검색합니다.")
+    public List<ItemResponse> searchItems(ItemSearchRequest itemSearchRequest){
+        return itemService.searchItems(itemSearchRequest);
     }
 }

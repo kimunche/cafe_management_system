@@ -1,6 +1,7 @@
 package com.example.cms.item.service;
 
 import com.example.cms.item.controller.request.ItemCreateRequest;
+import com.example.cms.item.controller.request.ItemSearchRequest;
 import com.example.cms.item.controller.request.ItemUpdateRequest;
 import com.example.cms.item.controller.response.ItemResponse;
 import com.example.cms.item.domain.Item;
@@ -24,18 +25,21 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
+    @Transactional(readOnly = true)
     public List<ItemResponse> findAll(){
         return itemRepository.findAll().stream()
                 .map(ItemResponse::of)
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<ItemResponse> findByName(String name) {
         return itemRepository.findAllByNameContaining(name)
                 .stream().map(ItemResponse::of)
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void create(ItemCreateRequest itemCreateRequest){
         Item newItem = itemCreateRequest.toItem();
         //중복체크
@@ -90,4 +94,12 @@ public class ItemService {
         itemRepository.deleteByItemId(itemId);
     }
 
+    @Transactional(readOnly = true)
+    public List<ItemResponse> searchItems(ItemSearchRequest itemSearchRequest) {
+        Item item = itemSearchRequest.toItem();
+        return itemRepository.searchItems(item)
+                .stream()
+                .map(ItemResponse::of)
+                .collect(Collectors.toList());
+    }
 }
