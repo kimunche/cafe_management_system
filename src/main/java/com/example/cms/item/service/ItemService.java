@@ -5,7 +5,7 @@ import com.example.cms.item.controller.request.ItemUpdateRequest;
 import com.example.cms.item.controller.response.ItemResponse;
 import com.example.cms.item.domain.Item;
 import com.example.cms.item.repository.ItemRepository;
-import com.example.cms.utils.exception.ItemAlreadyExistsException;
+import com.example.cms.utils.exception.CommonException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,10 +53,10 @@ public class ItemService {
         // 이름과 상태값이 같은 제품이 있을경우
         if(originItem != null && ( originItem.getCost().equals(newItem.getCost()))){
 //            throw new IllegalStateException("중복되는 기존 메뉴가 있습니다. " + originItem.getName() + "("+ originItem.getHotIce() +") " +originItem.getCost());
-            throw new ItemAlreadyExistsException(DUPLICATE_RESOURCE);
+            throw new CommonException(DUPLICATE_RESOURCE);
         }else if(originItem != null && ( originItem.getCost() != newItem.getCost())){
-            throw new IllegalStateException(newItem.getName() +"("+newItem.getHotIce()+") 는(운) 이미 "+originItem.getCost()+"원 으로 책정되어있습니다.");
-
+//            throw new IllegalStateException(newItem.getName() +"("+newItem.getHotIce()+") 는(운) 이미 "+originItem.getCost()+"원 으로 책정되어있습니다.");
+            throw new CommonException(DUPLICATE_RESOURCE);
         }
     }
 
@@ -67,7 +67,8 @@ public class ItemService {
         //name, cost, h/i 가 모두 중복
         Boolean isDuplicated = itemRepository.existsByNameAndCostAndHotIce(updateItem.getName(), updateItem.getCost(), updateItem.getHotIce());
         if(isDuplicated) {
-            throw new IllegalStateException("중복되는 기존 메뉴가 있습니다. " + updateItem.getName() + "(" + updateItem.getHotIce() + ") " + updateItem.getCost() + "원");
+//            throw new IllegalStateException("중복되는 기존 메뉴가 있습니다. " + updateItem.getName() + "(" + updateItem.getHotIce() + ") " + updateItem.getCost() + "원");
+            throw new CommonException(DUPLICATE_RESOURCE);
         }
 
         //name , h/i 중복

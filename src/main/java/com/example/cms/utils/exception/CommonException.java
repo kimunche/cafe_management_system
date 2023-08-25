@@ -3,11 +3,10 @@ package com.example.cms.utils.exception;
 import lombok.Getter;
 
 @Getter
-public class ItemAlreadyExistsException extends RuntimeException{
+public class CommonException extends RuntimeException{
     ErrorCode errorCode;
 
-    public ItemAlreadyExistsException(ErrorCode errorCode) {
+    public CommonException(ErrorCode errorCode) {
         this.errorCode = errorCode;
     }
-
 }
