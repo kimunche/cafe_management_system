@@ -4,18 +4,19 @@ package com.example.cms.cartitem.controller.response;
 import com.example.cms.item.domain.ItemStatus;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class CartItemCreateResponse {
 
     private String name;
     private Integer price;
     private ItemStatus status;
-    @Min(value = 1)
-    @NotNull
     private Integer count;
 
+    @Builder
     public CartItemCreateResponse(String name, Integer price, ItemStatus status, Integer count) {
         this.name = name;
         this.price = price;

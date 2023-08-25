@@ -2,6 +2,7 @@ package com.example.cms.member.service;
 
 
 import com.example.cms.member.controller.request.MemberCreateRequest;
+import com.example.cms.member.controller.request.MemberUpdateRequest;
 import com.example.cms.member.controller.response.MemberCreateResponse;
 import com.example.cms.member.controller.response.MemberResponse;
 import com.example.cms.member.controller.response.MemberUpdateResponse;
@@ -34,14 +35,18 @@ public class MemberService {
 
     @Transactional(readOnly = true)
     public MemberResponse findMembership(String mobile){
-        Member member = memberRepository.findByMobile(mobile).orElseThrow(()->new MemberNotFoundException("member not found"));
+        Member member = memberRepository
+                .findByMobile(mobile)
+                .orElseThrow(()->new MemberNotFoundException("member not found"));
         return new MemberResponse(member.getMobile(),member.getName(), member.getMembershipPoint());
     }
 
     @Transactional
-    public MemberUpdateResponse memberUpdate(String previousPhone, String updateMobile, String name){
-        Member member = memberRepository.findByMobile(previousPhone).orElseThrow(()->new MemberNotFoundException("member not found"));
-        member.update(name ,updateMobile);
+    public MemberUpdateResponse memberUpdate(String previousPhone, MemberUpdateRequest request){
+        Member member = memberRepository
+                .findByMobile(previousPhone)
+                .orElseThrow(()->new MemberNotFoundException("member not found"));
+        member.update(request.getName() ,request.getMobile());
         return new MemberUpdateResponse(member.getMobile(),member.getName());
     }
 

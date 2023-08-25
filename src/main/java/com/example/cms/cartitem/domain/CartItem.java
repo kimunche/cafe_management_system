@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity @Getter
+@Table(name = "cart_item")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CartItem {
 
@@ -42,8 +43,6 @@ public class CartItem {
     public void addCount(Integer count){
         this.count += count;
     }
-//    취소 처리?
-//    public void cancel(){
-//    }
+
 
 }

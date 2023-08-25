@@ -1,5 +1,6 @@
 package com.example.cms.cart.controller;
 
+import com.example.cms.cart.controller.request.CartDeleteRequest;
 import com.example.cms.cart.controller.request.CartRequest;
 import com.example.cms.cart.controller.response.CartResponse;
 import com.example.cms.cart.service.CartService;
@@ -25,12 +26,18 @@ public class CartController {
 
     @PostMapping("/create")
     public CartResponse CreateCart(@RequestBody CartRequest request){
-        System.out.println("request.getPhone() = " + request.getPhone());
-        List<CartItemCreateRequest> cartItemRequests = request.getCartItemRequests();
-        for (CartItemCreateRequest cartItemRequest : cartItemRequests) {
-            System.out.println("cartItemRequest = " + cartItemRequest);
-        }
-        CartResponse cartResponse = cartService.CreateCart(request.getPhone(), request);
-        return cartResponse;
+        return cartService.CreateCart(request);
     }
+
+    /**
+     * 카트 불러와서 삭제 과정 논의 어떤 기준으로 불러와서 진행을 할까?
+     * 1. 카트 아이디와 회원 아이디?
+     */
+    @PostMapping("/deleteItem")
+    public void deleteCartItem(@RequestBody CartDeleteRequest cartDeleteRequest){
+
+
+    }
+
+
 }

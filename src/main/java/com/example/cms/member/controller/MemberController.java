@@ -38,6 +38,6 @@ public class MemberController {
 
     @PatchMapping("/{previousPhone}/update")
     public MemberUpdateResponse updateMember(@PathVariable String previousPhone, @RequestBody @Valid MemberUpdateRequest request){
-        return memberService.memberUpdate(previousPhone,request.getMobile(), request.getName());
+        return memberService.memberUpdate(previousPhone,request);
     }
 }
