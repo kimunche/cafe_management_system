@@ -15,9 +15,7 @@ import com.example.cms.item.repository.ItemRepository;
 import com.example.cms.member.domain.Member;
 import com.example.cms.member.exception.MemberNotFoundException;
 import com.example.cms.member.repository.MemberRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.connector.ClientAbortException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,7 +69,7 @@ public class CartService {
         }
         Cart save = cartRepository.save(saveCart);
 
-        return new CartResponse(save.getCount(),save.getTotalPrice());
+        return new CartResponse(save.getCount(),save.getTotalPrice(),save.getId(),save.getMember().getId());
     }
 
     /**
@@ -88,13 +86,7 @@ public class CartService {
         Cart cart = findCart.get();
         List<CartItem> cartItems = cart.getCartItems();
 
-        for (CartItem cartItem : cartItems) {
-            for (CartItemDeleteRequest deleteRequest :request.getCartItemRequests()){
-                if (cartItem.getItem().getName() == deleteRequest.getName()){
-                    Integer minus = cartItem.getCount() - deleteRequest.getCount();
-                }
-            }
-        }
+
 
     }
 }
