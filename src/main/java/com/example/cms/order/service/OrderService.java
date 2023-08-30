@@ -1,5 +1,7 @@
 package com.example.cms.order.service;
 
+import com.example.cms.cart.domain.Cart;
+import com.example.cms.cart.repository.CartRepository;
 import com.example.cms.member.domain.Member;
 import com.example.cms.member.repository.MemberRepository;
 import com.example.cms.order.controller.request.OrderCreateRequest;
@@ -20,10 +22,12 @@ public class OrderService {
 
     private OrderRepository orderRepository;
     private MemberRepository memberRepository;
+    private CartRepository cartRepository;
 
-    public OrderService(OrderRepository orderRepository, MemberRepository memberRepository) {
+    public OrderService(OrderRepository orderRepository, MemberRepository memberRepository, CartRepository cartRepository) {
         this.orderRepository = orderRepository;
         this.memberRepository = memberRepository;
+        this.cartRepository = cartRepository;
     }
 
     @Transactional
@@ -33,7 +37,10 @@ public class OrderService {
         Member member = memberRepository.findById(request.getCartResponse().getMemberId())
                 .orElseThrow(()-> new CommonException(DATA_NOT_FOUND));
 
-        Order order = request.toOrder(member);
+        Cart cart = cartRepository.findById(request.getCartResponse().getCartId())
+                .orElseThrow(()-> new CommonException(DATA_NOT_FOUND));
+
+        Order order = request.toOrder(member, cart);
 
         //1-2. payment 확인
 
