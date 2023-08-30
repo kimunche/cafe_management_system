@@ -1,32 +1,28 @@
 package com.example.cms.order.domain;
 
+import com.example.cms.cart.domain.Cart;
 import com.example.cms.member.domain.Member;
+import com.example.cms.utils.entity.BaseDateTimeEntity;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Order {
+public class Order extends BaseDateTimeEntity {
 
-    @Id
-    @Column(name = "orders_id")
+    @Column(name = "seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "orders_number", nullable = false)
-    private String ordersNumber;
-
-    @Column(name = "orders_date", nullable = false)
-    private LocalDateTime ordersDate;
+    @Id
+    @Column(name = "orders_id", nullable = false)
+    private String ordersId;
 
     @Column(name = "cancel_date")
     private LocalDateTime cancelDate;
@@ -37,18 +33,27 @@ public class Order {
     @Column(name = "payment", nullable = false)
     private Payments payment;
 
-//    @ManyToOne
-//    @JoinColumn(name = "member_id")
-//    private Member member;
+    @OneToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Builder
-    public Order(Long id, String ordersNumber, LocalDateTime ordersDate, LocalDateTime cancelDate, Integer ordersPrice, Payments payment) {
+    public Order(Long id, String ordersId, LocalDateTime cancelDate, Integer ordersPrice, Payments payment, Cart cart, Member member) {
         this.id = id;
-        this.ordersNumber = ordersNumber;
-        this.ordersDate = ordersDate;
+        this.ordersId = ordersId;
         this.cancelDate = cancelDate;
         this.ordersPrice = ordersPrice;
         this.payment = payment;
+        this.cart = cart;
+        this.member = member;
+    }
+
+    public void setOrdersId(String ordersId){
+        this.ordersId = ordersId;
     }
 
     public void cancel(LocalDateTime cancelDate){

@@ -34,8 +34,6 @@ public class ItemController {
         return itemService.findByName(name);
     }
 
-    //TODO: 필터링
-
     @Operation(summary = "신규 상품 추가", description = "신규 상품을 추가합니다. 같은 이름의 메뉴를 중복체크합니다.")
     @PostMapping
     public void create(@RequestBody ItemCreateRequest itemCreateRequest){

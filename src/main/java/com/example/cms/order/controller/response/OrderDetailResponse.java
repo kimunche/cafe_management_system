@@ -11,18 +11,22 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 public class OrderDetailResponse {
-    private String ordersNumber;
-    private LocalDateTime ordersDate;
-    private Integer ordersPrice;
-    private Payments payment;
-    private Member member;
+
+    private String ordersId;
+    private String memberName;
+    private String mobile;
+    private LocalDateTime createdAt;
+    private LocalDateTime cancelDate;
+    private Payments payments;
 
     @Builder
-    public OrderDetailResponse(String ordersNumber, LocalDateTime ordersDate, Integer ordersPrice, Payments payment, Member member) {
-        this.ordersNumber = ordersNumber;
-        this.ordersDate = ordersDate;
-        this.ordersPrice = ordersPrice;
-        this.payment = payment;
-        this.member = member;
+    public OrderDetailResponse(String ordersId, String memberName, String mobile, LocalDateTime createdAt, LocalDateTime cancelDate, Payments payments) {
+        this.ordersId = ordersId;
+        this.memberName = memberName;
+        this.mobile = mobile;
+        this.createdAt = createdAt;
+        this.cancelDate = cancelDate;
+        this.payments = payments;
     }
+
 }

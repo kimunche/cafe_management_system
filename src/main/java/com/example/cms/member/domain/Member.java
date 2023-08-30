@@ -52,4 +52,8 @@ public class Member {
         this.name = name;
         this.mobile = mobile;
     }
+
+    public void updatePoint(Integer membershipPoint){
+        this.membershipPoint = membershipPoint;
+    }
 }
