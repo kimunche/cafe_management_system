@@ -15,28 +15,20 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class OrderCreateRequest {
 
-    private Long cartId;
-    private Integer ordersPrice;
     private Payments payment;
-    private Long memberId;
-    private CartResponse response;
-
-    public OrderCreateRequest(Long cartId, Integer ordersPrice, Payments payment, Long memberId, CartResponse response) {
-        this.cartId = cartId;
-        this.ordersPrice = ordersPrice;
-        this.payment = payment;
-        this.memberId = memberId;
-        this.response = response;
-    }
+    private CartResponse cartResponse;
 
     @Builder
-
+    public OrderCreateRequest(Payments payment, CartResponse cartResponse) {
+        this.payment = payment;
+        this.cartResponse = cartResponse;
+    }
 
     public Order toOrder(Member member){
         return Order.builder()
                 .member(member)
                 .payment(payment)
-                .ordersPrice(response.getTotalPrice())
+                .ordersPrice(cartResponse.getTotalPrice())
                 .build();
     }
 }

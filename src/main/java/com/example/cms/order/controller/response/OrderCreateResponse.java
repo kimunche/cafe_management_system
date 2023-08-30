@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 public class OrderCreateResponse {
 
     private String orderId;
-    private Boolean result;
+    private boolean result;
 
     @Builder
-    public OrderCreateResponse(String orderId, Boolean result) {
+    public OrderCreateResponse(String orderId, boolean result) {
         this.orderId = orderId;
         this.result = result;
     }

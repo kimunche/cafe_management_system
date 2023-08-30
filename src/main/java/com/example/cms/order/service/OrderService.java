@@ -30,10 +30,12 @@ public class OrderService {
     public OrderCreateResponse createOrder(OrderCreateRequest request) {
 
         //1. 회원 멤버십 포인트 확인
-        Member member = memberRepository.findById(request.getMemberId())
+        Member member = memberRepository.findById(request.getCartResponse().getMemberId())
                 .orElseThrow(()-> new CommonException(DATA_NOT_FOUND));
 
         Order order = request.toOrder(member);
+
+        //1-2. payment 확인
 
         //2. 포인트 차감
         int memberPoint = order.getMember().getMembershipPoint();
@@ -70,14 +72,7 @@ public class OrderService {
             orderRepository.save(order);
         }
 
-        //response
-        OrderCreateResponse response = new OrderCreateResponse();
-        response.builder()
-                .orderId(orderRepository.findByOrdersId(generatedOrderId)
-                        .orElseThrow(() -> new CommonException(DATA_NOT_FOUND)))
-                .build();
-
-        return response;
+        return OrderCreateResponse.of(order);
     }
 
 }

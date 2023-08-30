@@ -4,6 +4,7 @@ import com.example.cms.order.controller.request.OrderCreateRequest;
 import com.example.cms.order.controller.response.OrderCreateResponse;
 import com.example.cms.order.service.OrderService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ public class OrderController {
     //TODO: 주문내역조회, 결제, 취소
 
     @PostMapping
-    public OrderCreateResponse create(OrderCreateRequest request){
+    public OrderCreateResponse create(@RequestBody OrderCreateRequest request){
         return orderService.createOrder(request);
     }
 }
