@@ -3,10 +3,12 @@ package com.example.cms.cart.controller.response;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 public class CartResponse {
 
     private Integer totalCount;

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class MemberInitDb {
         private final ItemService itemService;
         public void dbInit1(){
             for(int i = 0; i<5; i++){
-                MemberCreateRequest memberCreateRequest = new MemberCreateRequest("1234" + i,"kim" +i ,LocalDate.now(),MemberStatus.OPEN);
+                MemberCreateRequest memberCreateRequest = new MemberCreateRequest("1234" + i,"kim" +i , LocalDateTime.now(),MemberStatus.OPEN);
                 memberService.save(memberCreateRequest);
             }
             ItemCreateRequest ice = new ItemCreateRequest("라떼", 1000, ItemStatus.ICED);

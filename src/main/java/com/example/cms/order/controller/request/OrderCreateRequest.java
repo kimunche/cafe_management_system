@@ -1,5 +1,6 @@
 package com.example.cms.order.controller.request;
 
+import com.example.cms.cart.controller.response.CartResponse;
 import com.example.cms.member.domain.Member;
 import com.example.cms.order.domain.Order;
 import com.example.cms.order.domain.Payments;
@@ -14,27 +15,20 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class OrderCreateRequest {
 
-    private String ordersNumber;
-    private LocalDateTime ordersDate;
-    private Integer ordersPrice;
     private Payments payment;
-    private Member member;
+    private CartResponse cartResponse;
 
     @Builder
-    public OrderCreateRequest(String ordersNumber, LocalDateTime ordersDate, Integer ordersPrice, Payments payment, Member member) {
-        this.ordersNumber = ordersNumber;
-        this.ordersDate = ordersDate;
-        this.ordersPrice = ordersPrice;
+    public OrderCreateRequest(Payments payment, CartResponse cartResponse) {
         this.payment = payment;
-        this.member = member;
+        this.cartResponse = cartResponse;
     }
 
-    public Order toOrder(){
+    public Order toOrder(Member member){
         return Order.builder()
-                .ordersNumber(ordersNumber)
-                .ordersDate(ordersDate)
-                .ordersPrice(ordersPrice)
+                .member(member)
                 .payment(payment)
+                .ordersPrice(cartResponse.getTotalPrice())
                 .build();
     }
 }
