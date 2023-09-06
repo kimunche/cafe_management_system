@@ -1,6 +1,7 @@
 package com.example.cms.order.controller.response;
 
 import com.example.cms.member.domain.Member;
+import com.example.cms.order.domain.Order;
 import com.example.cms.order.domain.Payments;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,6 +28,17 @@ public class OrderDetailResponse {
         this.createdAt = createdAt;
         this.cancelDate = cancelDate;
         this.payments = payments;
+    }
+
+    public static OrderDetailResponse of(Order order){
+        return OrderDetailResponse.builder()
+                .ordersId(order.getOrdersId())
+                .memberName(order.getMember().getName())
+                .mobile(order.getMember().getMobile())
+                .createdAt(order.getCreatedAt())
+                .cancelDate(order.getCancelDate())
+                .payments(order.getPayment())
+                .build();
     }
 
 }

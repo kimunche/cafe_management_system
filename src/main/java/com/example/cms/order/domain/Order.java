@@ -17,11 +17,12 @@ import java.time.LocalDateTime;
 public class Order extends BaseDateTimeEntity {
 
     @Column(name = "seq")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Id
     @Column(name = "orders_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String ordersId;
 
     @Column(name = "cancel_date")
@@ -31,13 +32,14 @@ public class Order extends BaseDateTimeEntity {
     private Integer ordersPrice;
 
     @Column(name = "payment", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Payments payment;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
