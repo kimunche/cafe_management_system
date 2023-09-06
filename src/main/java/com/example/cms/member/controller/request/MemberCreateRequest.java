@@ -27,15 +27,13 @@ public class MemberCreateRequest {
         return Member.builder()
                 .mobile(mobile)
                 .name(name)
-                .createDate(LocalDateTime.now())
                 .status(MemberStatus.OPEN)
                 .build();
     }
     @Builder
-    public MemberCreateRequest(String mobile, String name, LocalDateTime createDate, MemberStatus status) {
+    public MemberCreateRequest(String mobile, String name,  MemberStatus status) {
         this.mobile = mobile;
         this.name = name;
-        this.createDate = createDate;
         this.status = status;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.cms.member.domain;
 
+import com.example.cms.utils.entity.BaseDateTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @Entity @Getter
 @Table(name = "member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseDateTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
@@ -24,9 +25,6 @@ public class Member {
     @Column(name = "membership_point")
     private Integer membershipPoint;
 
-    @Column(name = "create_date")
-    private LocalDateTime createDate;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private MemberStatus status;
@@ -35,12 +33,11 @@ public class Member {
     Integer firstJoinPoint = 10000;
 
     @Builder
-    public Member(Long id, String mobile, String name, Integer membershipPoint, LocalDateTime createDate, MemberStatus status) {
+    public Member(Long id, String mobile, String name, Integer membershipPoint,  MemberStatus status) {
         this.id = id;
         this.mobile = mobile;
         this.name = name;
         this.membershipPoint = membershipPoint;
-        this.createDate = createDate;
         this.status = status;
     }
 

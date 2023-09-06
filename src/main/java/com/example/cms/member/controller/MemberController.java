@@ -31,11 +31,13 @@ public class MemberController {
         return memberService.save(request);
     }
 
-    @GetMapping("/{phone}")
+    @Operation(summary = "회원 조회", description = "회원에 대한 조회를 진행합니다.")
+    @GetMapping("/membership/{phone}")
     public MemberResponse findMembership(@PathVariable String phone){
         return memberService.findMembership(phone);
     }
 
+    @Operation(summary = "회원 정보 수정", description = "회원 정보를 수정합니다.")
     @PatchMapping("/{previousPhone}/update")
     public MemberUpdateResponse updateMember(@PathVariable String previousPhone, @RequestBody @Valid MemberUpdateRequest request){
         return memberService.memberUpdate(previousPhone,request);

@@ -50,7 +50,17 @@ public class MemberService {
         return new MemberUpdateResponse(member.getMobile(),member.getName());
     }
 
+    @Transactional(readOnly = true)
+    public void findMemberList(){
+        
+    }
+
     /**
      * 블라인드 할 회원 정책 필요
      */
+
+
+
+
+
 }
