@@ -19,7 +19,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     public List<Member> findMemberList(){
 
         List<Tuple> fetch = queryFactory.select().from(QMember.member).fetch();
-        System.out.println("fetch = " + fetch);
+
 
         return null;
     }
