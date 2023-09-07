@@ -55,9 +55,9 @@ public class ItemController {
     }
 
     //TODO: 필터링 완료
-    @GetMapping("/search/items")
+    @GetMapping("/search")
     @Operation(summary = "상품 검색", description = "상품을 조건으로 검색합니다.")
-    public List<ItemResponse> searchItems(ItemSearchRequest itemSearchRequest){
+    public List<ItemResponse> searchItems(@RequestBody ItemSearchRequest itemSearchRequest){
         return itemService.searchItems(itemSearchRequest);
     }
 }

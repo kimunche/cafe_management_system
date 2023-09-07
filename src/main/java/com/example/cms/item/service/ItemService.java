@@ -96,8 +96,8 @@ public class ItemService {
 
     @Transactional(readOnly = true)
     public List<ItemResponse> searchItems(ItemSearchRequest itemSearchRequest) {
-        Item item = itemSearchRequest.toItem();
-        return itemRepository.searchItems(item)
+        Item filter = itemSearchRequest.toItem();
+        return itemRepository.searchItems(filter)
                 .stream()
                 .map(ItemResponse::of)
                 .collect(Collectors.toList());
