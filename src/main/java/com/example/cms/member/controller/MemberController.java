@@ -4,6 +4,7 @@ package com.example.cms.member.controller;
 import com.example.cms.member.controller.request.MemberCreateRequest;
 import com.example.cms.member.controller.request.MemberUpdateRequest;
 import com.example.cms.member.controller.response.MemberCreateResponse;
+import com.example.cms.member.controller.response.MemberPageResponse;
 import com.example.cms.member.controller.response.MemberResponse;
 import com.example.cms.member.controller.response.MemberUpdateResponse;
 
@@ -12,6 +13,8 @@ import com.example.cms.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -42,4 +45,15 @@ public class MemberController {
     public MemberUpdateResponse updateMember(@PathVariable String previousPhone, @RequestBody @Valid MemberUpdateRequest request){
         return memberService.memberUpdate(previousPhone,request);
     }
+
+
+    @GetMapping("/memberList")
+    public MemberPageResponse memberListPaging(@RequestParam(defaultValue = "0", required = false) int pageNo,
+                                               @RequestParam int pageSize){
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        memberService.memberListPaging(pageRequest);
+
+        return new MemberPageResponse();
+    }
+
 }
