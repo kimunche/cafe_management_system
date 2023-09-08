@@ -3,10 +3,14 @@ package com.example.cms.item.service;
 import com.example.cms.item.controller.request.ItemCreateRequest;
 import com.example.cms.item.controller.request.ItemSearchRequest;
 import com.example.cms.item.controller.request.ItemUpdateRequest;
+import com.example.cms.item.controller.request.PageRequest;
 import com.example.cms.item.controller.response.ItemResponse;
 import com.example.cms.item.domain.Item;
 import com.example.cms.item.repository.ItemRepository;
 import com.example.cms.utils.exception.CommonException;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -101,5 +105,12 @@ public class ItemService {
                 .stream()
                 .map(ItemResponse::of)
                 .collect(Collectors.toList());
+    }
+
+    public PageImpl<ItemResponse> searchItemsPaging(ItemSearchRequest itemSearchRequest, PageRequest pageRequest) {
+        Pageable pageable = pageRequest.of();
+        PageImpl<Item> searched = itemRepository.searchItemsPaging(pageable, itemSearchRequest.toItem());
+        PageImpl<ItemResponse> result = (PageImpl<ItemResponse>) searched.map(ItemResponse::of);
+        return result;
     }
 }

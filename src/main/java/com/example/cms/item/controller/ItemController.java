@@ -3,11 +3,13 @@ package com.example.cms.item.controller;
 import com.example.cms.item.controller.request.ItemCreateRequest;
 import com.example.cms.item.controller.request.ItemSearchRequest;
 import com.example.cms.item.controller.request.ItemUpdateRequest;
+import com.example.cms.item.controller.request.PageRequest;
 import com.example.cms.item.controller.response.ItemResponse;
 import com.example.cms.item.service.ItemService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,5 +61,11 @@ public class ItemController {
     @Operation(summary = "상품 검색", description = "상품을 조건으로 검색합니다.")
     public List<ItemResponse> searchItems(@RequestBody ItemSearchRequest itemSearchRequest){
         return itemService.searchItems(itemSearchRequest);
+    }
+
+    @GetMapping("/search/paging")
+    @Operation(summary = "상품 검색", description = "상품을 조건으로 검색합니다.")
+    public PageImpl<ItemResponse> searchItems(@RequestBody ItemSearchRequest itemSearchRequest, PageRequest pageRequest){
+        return itemService.searchItemsPaging(itemSearchRequest, pageRequest);
     }
 }

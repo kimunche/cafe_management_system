@@ -13,6 +13,7 @@ public class ItemResponse {
     private Integer cost;
     private ItemStatus hotIce;
 
+
     @Builder
     public ItemResponse(String name, Integer cost, ItemStatus hotIce) {
         this.name = name;
