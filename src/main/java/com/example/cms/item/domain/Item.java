@@ -11,7 +11,7 @@ import lombok.*;
 public class Item extends BaseDateTimeEntity {
 
     @Id
-    @Column(name = "seq")
+    @Column(name = "item_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
 
