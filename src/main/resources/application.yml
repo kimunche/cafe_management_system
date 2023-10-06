@@ -9,22 +9,43 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         physical_naming_strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         format_sql: true
     show-sql: true
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
   # 로그 레벨 설정
-  logging:
-    level:
-      org.hibernate.SQL: debug
-      org.hibernate.type: trace # 실제 들어가는 파라미터값 찍어주는 설정
+logging:
+  level:
+    org.hibernate.SQL: debug
+   # org.hibernate.type: trace # 실제 들어가는 파라미터값 찍어주는 설정
+    org.hibernate.orm.jdbc.bind: trace
+    org.hibernate.type: trace
+    org.hibernate.stat: debug
 
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+      
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: ${mail.username}
+#    password: ${mail.password}
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
 
 
 #swagger

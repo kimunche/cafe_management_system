@@ -1,33 +1,34 @@
 package com.example.cms.item.domain;
 
 import com.example.cms.utils.entity.BaseDateTimeEntity;
-import jakarta.persistence.*;
-import lombok.*;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
 
 
-@Entity
-@Table(name = "item")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Item extends BaseDateTimeEntity {
+@RedisHash("Item")
+public class ItemRedis {
 
     @Id
-    @Column(name = "item_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
 
-    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "cost", nullable = false)
     private Integer cost;
 
-    @Column(name = "hot_ice", nullable = false)
-    @Enumerated(EnumType.STRING)
     private ItemStatus hotIce;
 
     @Builder
-    public Item(Long id,String name, Integer cost, ItemStatus hotIce) {
+    public ItemRedis(Long id, String name, Integer cost, ItemStatus hotIce) {
         this.itemId = id;
         this.name = name;
         this.cost = cost;
