@@ -12,4 +12,6 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
     Optional<Member> findByMobile(String mobile);
 
     Optional<Member> findById(Long id);
+
+    boolean existsByMobile(String mobile);
 }

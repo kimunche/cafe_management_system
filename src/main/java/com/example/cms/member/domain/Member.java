@@ -7,8 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Entity @Getter
 @Table(name = "member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -29,16 +27,24 @@ public class Member extends BaseDateTimeEntity {
     @Column(name = "status")
     private MemberStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "authority")
+    private UserRoleEnum role;
+
+    private String password;
+
     //첫 회원 가입 포인트
     Integer firstJoinPoint = 10000;
 
     @Builder
-    public Member(Long id, String mobile, String name, Integer membershipPoint,  MemberStatus status) {
+    public Member(Long id, String mobile, String name, Integer membershipPoint, MemberStatus status, UserRoleEnum role, String password) {
         this.id = id;
         this.mobile = mobile;
         this.name = name;
         this.membershipPoint = membershipPoint;
         this.status = status;
+        this.role = role;
+        this.password = password;
     }
 
     public void firstPoint(){
