@@ -3,6 +3,8 @@
 시스템정보
 - Java 17
 - Spring Boot 3.1.2
+- JPA
+- QueryDsl
 
 * UI 제외, API만 개발. (restful Tool을 이용한 데이터 확인)
 * Swagger 적용을 통한 API 문서 노출
@@ -24,5 +26,5 @@
 
 - 고객정보는 휴대폰 번호를 통해서 조회하며, 해당 번호를 통한 멤버십 포인트로 주문이 가능.
 
----
-* 라이브러리 사용 자유.
+## 비즈니스 로직 플로우차트
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/161beaff-a108-4027-b866-765263047098/Untitled.png)
