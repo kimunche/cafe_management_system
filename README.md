@@ -27,4 +27,5 @@
 - 고객정보는 휴대폰 번호를 통해서 조회하며, 해당 번호를 통한 멤버십 포인트로 주문이 가능.
 
 ## 비즈니스 로직 플로우차트
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/161beaff-a108-4027-b866-765263047098/Untitled.png)
+![image](https://github.com/kimunche/cafe_management_system/assets/90191707/01e08b7e-4091-471a-a4a6-5a75aa94aeb2)
+
